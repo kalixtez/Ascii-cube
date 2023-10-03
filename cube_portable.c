@@ -117,8 +117,8 @@ void model_view(TRIANGLE* triangle)
 VERTEX projection_transform(VERTEX* vertex)
 {
 	VERTEX projected;
-	projected.X = -near_plane*vertex->X/right_plane;
-	projected.Y = -near_plane*vertex->Y/up_plane;
+	projected.X = near_plane*vertex->X/right_plane;
+	projected.Y = near_plane*vertex->Y/up_plane;
 
 	projected.W = -vertex->Z;
 
@@ -224,7 +224,7 @@ void raster_triangle(TRIANGLE* triangle)
 				if(z_buffer[y_index*viewport_width + x_index] > interpolated)
 				{
 					framebuffer[y_index*viewport_width + x_index] = triangle->COLOUR;
-					z_buffer[y_index*viewport_width + x_index] = interpolated;
+					//z_buffer[y_index*viewport_width + x_index] = interpolated;
 				}
 				//putchar(triangle->COLOUR);
 			}
@@ -325,7 +325,6 @@ int main(int argc, char** argv)
 		#else
 
 		fprintf(console_output, framebuffer, total_res);
-		printf("\033[0;0");
 
 		#endif
 
@@ -337,7 +336,8 @@ int main(int argc, char** argv)
 		#ifdef _WIN32
 		Sleep(25);
 		#else
-		sleep(25);
+		usleep(25000);
+		printf("\033[0;0f");
 		#endif
 	}
 
