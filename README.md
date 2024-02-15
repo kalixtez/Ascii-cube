@@ -1,3 +1,2 @@
 # Ascii-cube
-
-Works only on Windows for now.
+cube_portable should run on both Linux and Windows NT systems.
